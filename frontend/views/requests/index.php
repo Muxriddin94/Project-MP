@@ -1,7 +1,8 @@
 <?php
 
-use yii\helpers\Html;
+use frontend\models\Requests;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\search\RequestsSearch */
@@ -30,14 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'user_id',
                 'label' => 'Hodim',
-                'value' => function (\frontend\models\Requests $model) {
+                'value' => function (Requests $model) {
                     return $model->user->full_name;
                 }
             ],
             'full_name',
             [
                 'attribute' => 'document_type',
-                'value' => function (\frontend\models\Requests $model) {
+                'value' => function (Requests $model) {
                     if ($model->document_type == 'G') {
                         return 'Guvohnoma';
                     } elseif ($model->document_type == 'P') {
@@ -51,15 +52,19 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'status',
             [
                 'attribute' => 'status',
-                'format'=>'raw',
-                'value' => function (\frontend\models\Requests $model) {
+                'format' => 'raw',
+                'value' => function (Requests $model) {
                     if ($model->status == 1) {
                         return '
-            <button class="btn btn-primary">keldi</button>
-            ';
-                    }elseif ($model->status == 2){
+                        <button class="btn btn-primary">keldi</button>
+                         ';
+                    } elseif ($model->status == 2) {
                         return '
                          <button class="btn btn-success">ketti</button>
+                        ';
+                    } elseif ($model->status == 4) {
+                        return '
+                        <button class="btn btn-danger">otkaz</button>
                         ';
                     }
                 }
